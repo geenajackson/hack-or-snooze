@@ -73,8 +73,18 @@ class StoryList {
    * Returns the new Story instance
    */
 
-  async addStory( /* user, newStory */) {
+  async addStory(user, newStory) {
     // UNIMPLEMENTED: complete this function!
+    const story = new Story(10, newStory.title, newStory.author, newStory.url, user.username, user.createdAt)
+    await axios.post("https://hack-or-snooze-v3.herokuapp.com/stories", {
+      "token": user.loginToken,
+      "story": {
+        "author": newStory.author,
+        "title": newStory.title,
+        "url": newStory.url
+      }
+    });
+    return story;
   }
 }
 
@@ -90,13 +100,13 @@ class User {
    */
 
   constructor({
-                username,
-                name,
-                createdAt,
-                favorites = [],
-                ownStories = []
-              },
-              token) {
+    username,
+    name,
+    createdAt,
+    favorites = [],
+    ownStories = []
+  },
+    token) {
     this.username = username;
     this.name = name;
     this.createdAt = createdAt;
