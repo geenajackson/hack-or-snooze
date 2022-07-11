@@ -75,8 +75,7 @@ class StoryList {
 
   async addStory(user, newStory) {
     // UNIMPLEMENTED: complete this function!
-    const story = new Story(10, newStory.title, newStory.author, newStory.url, user.username, user.createdAt)
-    await axios.post("https://hack-or-snooze-v3.herokuapp.com/stories", {
+    let awaitStory = await axios.post("https://hack-or-snooze-v3.herokuapp.com/stories", {
       "token": user.loginToken,
       "story": {
         "author": newStory.author,
@@ -84,6 +83,9 @@ class StoryList {
         "url": newStory.url
       }
     });
+    let postStory = awaitStory.data.story;
+    console.log(postStory)
+    const story = new Story(postStory.storyId, postStory.title, postStory.author, postStory.url, postStory.username, postStory.createdAt)
     return story;
   }
 }
