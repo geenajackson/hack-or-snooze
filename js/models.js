@@ -74,7 +74,6 @@ class StoryList {
    */
 
   async addStory(user, newStory) {
-    // UNIMPLEMENTED: complete this function!
     let awaitStory = await axios.post("https://hack-or-snooze-v3.herokuapp.com/stories", {
       "token": user.loginToken,
       "story": {
@@ -84,7 +83,7 @@ class StoryList {
       }
     });
     let postStory = awaitStory.data.story;
-    console.log(postStory)
+    //take properties from the returned object in awaitStory and create a new instance of Story
     const story = new Story(postStory.storyId, postStory.title, postStory.author, postStory.url, postStory.username, postStory.createdAt)
     return story;
   }
