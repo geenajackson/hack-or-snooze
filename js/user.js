@@ -120,12 +120,15 @@ function updateUIOnUserLogin() {
  */
 
 async function addFavorite(user, storyId) {
-  const response = await axios({
-    url: `${BASE_URL}/users/${user.username}/favorites/${storyId}`,
-    params: { token: user.loginToken },
-    method: "POST",
-  })
-  return response;
+  try {
+    const response = await axios({
+      url: `${BASE_URL}/users/${user.username}/favorites/${storyId}`,
+      params: { token: user.loginToken },
+      method: "POST",
+    })
+    return response
+  }
+  catch (err) { }
 }
 
 // let newFavorite = await addFavorite(currentUser, "0ff9d9aa-4bd1-44f3-9929-e4d7b56ce5f4")
