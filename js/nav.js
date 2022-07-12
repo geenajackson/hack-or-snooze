@@ -35,6 +35,15 @@ function navSubmitStory(evt) {
 
 $navSubmitStory.on("click", navSubmitStory);
 
+//shows the user's favorite stories
+function navFaveStories(evt) {
+  console.debug("navFaveStories", evt);
+  hidePageComponents();
+  showFaveStories();
+}
+
+$navFaveStories.on("click", navFaveStories);
+
 /** When a user first logins in, update the navbar to reflect that. */
 
 function updateNavOnLogin() {
@@ -43,5 +52,6 @@ function updateNavOnLogin() {
   $navLogin.hide();
   $navLogOut.show();
   $navSubmitStory.show();
+  $navFaveStories.show();
   $navUserProfile.text(`${currentUser.username}`).show();
 }
