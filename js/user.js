@@ -129,3 +129,12 @@ async function addFavorite(user, storyId) {
 }
 
 // let newFavorite = await addFavorite(currentUser, "0ff9d9aa-4bd1-44f3-9929-e4d7b56ce5f4")
+
+async function deleteFavorite(user, storyId) {
+  const response = await axios({
+    url: `${BASE_URL}/users/${user.username}/favorites/${storyId}`,
+    params: { token: user.loginToken },
+    method: "DELETE",
+  })
+  return response;
+}
