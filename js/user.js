@@ -138,3 +138,12 @@ async function deleteFavorite(user, storyId) {
   })
   return response;
 }
+
+async function deleteStory(user, storyId) {
+  const response = await axios({
+    url: `${BASE_URL}/stories/${storyId}`,
+    params: { token: user.loginToken },
+    method: "DELETE",
+  })
+  return response;
+}
