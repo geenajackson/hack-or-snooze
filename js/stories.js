@@ -3,15 +3,18 @@
 // This is the global list of the stories, an instance of StoryList
 let storyList;
 let faveStoryList;
-let faveStoryIds
+let faveStoryIds = "";
 
 /** Get and show stories when site first loads. */
 
 async function getAndShowStoriesOnStart() {
   storyList = await StoryList.getStories();
-  faveStoryList = await StoryList.getFaveStories();
+  try {
+    faveStoryList = await StoryList.getFaveStories();
 
-  faveStoryIds = faveStoryList.stories.map(story => story.storyId);
+    faveStoryIds = faveStoryList.stories.map(story => story.storyId);
+  } catch (err) { };
+
 
   $storiesLoadingMsg.remove();
 
@@ -62,9 +65,11 @@ function putStoriesOnPage(list) {
     }
     else $story.prepend("<span class='icon unfavorite'>&#9734;</span>");
 
-    if (story.username === currentUser.username) {
-      $story.append("<small class='delete'><span class='icon'>&#128465;</span> delete story</small>")
-    }
+    try {
+      if (story.username === currentUser.username) {
+        $story.append("<small class='delete'><span class='icon'>&#128465;</span> delete story</small>")
+      }
+    } catch (err) { }
     $allStoriesList.append($story);
   }
 
