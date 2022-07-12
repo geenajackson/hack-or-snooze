@@ -3,15 +3,25 @@
 // This is the global list of the stories, an instance of StoryList
 let storyList;
 let faveStoryList;
+let faveStoryIds
 
 /** Get and show stories when site first loads. */
 
 async function getAndShowStoriesOnStart() {
   storyList = await StoryList.getStories();
   faveStoryList = await StoryList.getFaveStories();
+
+  faveStoryIds = faveStoryList.stories.map(story => story.storyId);
+
   $storiesLoadingMsg.remove();
 
-  putStoriesOnPage();
+  putStoriesOnPage(storyList);
+}
+
+async function showFaveStories() {
+  faveStoryList = await StoryList.getFaveStories()
+
+  putStoriesOnPage(faveStoryList);
 }
 
 /**
@@ -39,14 +49,18 @@ function generateStoryMarkup(story) {
 
 /** Gets list of stories from server, generates their HTML, and puts on page. */
 
-function putStoriesOnPage() {
+function putStoriesOnPage(list) {
   console.debug("putStoriesOnPage");
 
   $allStoriesList.empty();
 
   // loop through all of our stories and generate HTML for them
-  for (let story of storyList.stories) {
+  for (let story of list.stories) {
     const $story = generateStoryMarkup(story);
+    if (faveStoryIds.includes(story.storyId)) {
+      $story.prepend("<span class='icon'>&#9733;</span>")
+    }
+    else $story.prepend("<span class='icon'>&#9734;</span>");
     $allStoriesList.append($story);
   }
 
