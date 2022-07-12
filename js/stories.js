@@ -69,12 +69,12 @@ function putStoriesOnPage(list) {
 
 //listen for favorite/unfavorite classes and calls relevant function
 
-$body.on("click", ".unfavorite", function () {
+$allStoriesList.on("click", ".unfavorite", function () {
   addFavorite(currentUser, this.closest("li").id);
   getAndShowStoriesOnStart();
 });
 
-$body.on("click", ".favorite", function () {
+$allStoriesList.on("click", ".favorite", function () {
   deleteFavorite(currentUser, this.closest("li").id);
   getAndShowStoriesOnStart();
 });
