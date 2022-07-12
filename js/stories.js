@@ -63,7 +63,7 @@ function putStoriesOnPage(list) {
     else $story.prepend("<span class='icon unfavorite'>&#9734;</span>");
 
     if (story.username === currentUser.username) {
-      $story.append("<small class='delete'><span class='icon delete'>&#128465;</span> delete story</small>")
+      $story.append("<small class='delete'><span class='icon'>&#128465;</span> delete story</small>")
     }
     $allStoriesList.append($story);
   }
@@ -80,8 +80,13 @@ $allStoriesList.on("click", ".unfavorite", function () {
 
 $allStoriesList.on("click", ".favorite", function () {
   deleteFavorite(currentUser, this.closest("li").id);
-  getAndShowStoriesOnStart();
+  setTimeout(getAndShowStoriesOnStart, 100);
 });
+
+$allStoriesList.on("click", ".delete", function () {
+  deleteStory(currentUser, this.closest("li").id);
+  setTimeout(getAndShowStoriesOnStart, 100);
+})
 
 //submits a story based on values from story form
 async function submitStory(evt) {
