@@ -2,11 +2,13 @@
 
 // This is the global list of the stories, an instance of StoryList
 let storyList;
+let faveStoryList;
 
 /** Get and show stories when site first loads. */
 
 async function getAndShowStoriesOnStart() {
   storyList = await StoryList.getStories();
+  faveStoryList = await StoryList.getFaveStories();
   $storiesLoadingMsg.remove();
 
   putStoriesOnPage();
