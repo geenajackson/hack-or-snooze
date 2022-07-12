@@ -61,6 +61,10 @@ function putStoriesOnPage(list) {
       $story.prepend("<span class='icon favorite'>&#9733;</span>")
     }
     else $story.prepend("<span class='icon unfavorite'>&#9734;</span>");
+
+    if (story.username === currentUser.username) {
+      $story.append("<small class='delete'><span class='icon delete'>&#128465;</span> delete story</small>")
+    }
     $allStoriesList.append($story);
   }
 
