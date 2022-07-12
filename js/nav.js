@@ -9,7 +9,7 @@
 function navAllStories(evt) {
   console.debug("navAllStories", evt);
   hidePageComponents();
-  putStoriesOnPage();
+  putStoriesOnPage(storyList);
 }
 
 $body.on("click", "#nav-all", navAllStories);
@@ -28,6 +28,7 @@ $navLogin.on("click", navLoginClick);
 
 //shows the story form on click of "submit story"
 function navSubmitStory(evt) {
+  console.debug("navSubmitStory", evt);
   hidePageComponents();
   $storyForm.show();
 }
