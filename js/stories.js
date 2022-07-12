@@ -58,15 +58,28 @@ function putStoriesOnPage(list) {
   for (let story of list.stories) {
     const $story = generateStoryMarkup(story);
     if (faveStoryIds.includes(story.storyId)) {
-      $story.prepend("<span class='icon'>&#9733;</span>")
+      $story.prepend("<span class='icon favorite'>&#9733;</span>")
     }
-    else $story.prepend("<span class='icon'>&#9734;</span>");
+    else $story.prepend("<span class='icon unfavorite'>&#9734;</span>");
     $allStoriesList.append($story);
   }
 
   $allStoriesList.show();
 }
 
+//listen for favorite/unfavorite classes and calls relevant function
+
+$body.on("click", ".unfavorite", function () {
+  addFavorite(currentUser, this.closest("li").id);
+  getAndShowStoriesOnStart();
+});
+
+$body.on("click", ".favorite", function () {
+  deleteFavorite(currentUser, this.closest("li").id);
+  getAndShowStoriesOnStart();
+});
+
+//submits a story based on values from story form
 async function submitStory(evt) {
   evt.preventDefault();
 
