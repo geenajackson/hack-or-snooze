@@ -67,7 +67,11 @@ class StoryList {
   }
 
   static async getFaveStories() {
-    const response = await axios({})
+    const response = await axios({
+      url: `${BASE_URL}/users/${currentUser.username}`,
+      params: { token: currentUser.loginToken },
+      method: "GET"
+    })
 
     const stories = response.data.user.favorites.map(story => new Story(story));
 
