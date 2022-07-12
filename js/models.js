@@ -24,7 +24,7 @@ class Story {
   /** Parses hostname out of URL and returns it. */
 
   getHostName() {
-    // UNIMPLEMENTED: complete this function!
+    //gets hostname property from URL object
     const hostname = new URL(this.url).hostname;
     return hostname;
   }
